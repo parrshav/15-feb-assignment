@@ -1,0 +1,80 @@
+MultiprocessingAssignment Questions 
+Assignment 
+Q1. What is multiprocessing in python? Why is it useful?  
+Multiprocessing in Python refers to the capability of running multiple processes concurrently to achieve parallelism. It allows you to execute multiple tasks simultaneously by utilizing multiple processor cores or CPUs
+Increased Performance
+Parallel Execution:
+CPU-bound Tasks
+Efficient Resource Utilization
+Q2. What are the differences between multiprocessing and multithreading? 
+Multiprocessing and multithreading are both techniques used for achieving concurrent execution in Python, but they differ in several key aspects. 
+Execution Model:
+Multiprocessing: In multiprocessing, multiple processes are created, each with its own memory space and resources. These processes run independently and can execute tasks in parallel on different CPUs or cores.
+Multithreading: In multithreading, multiple threads are created within a single process. Threads share the same memory space and resources of the parent process. These threads run concurrently and can execute tasks simultaneously, but typically within the same CPU or core.Resource Usage:
+Multiprocessing: Each process in multiprocessing has its own memory space, allowing for true parallelism.
+Multithreading: Threads within a process share the same memory space, allowing for efficient sharing of data
+3. Complexity:
+Multiprocessing: Implementing multiprocessing can be more complex due to the need for inter-process communication,
+              Multithreading: Multithreading is generally easier to implement since threads share memory    and can communicate more easily
+Scalability:
+Multiprocessing: Multiprocessing provides better scalability when dealing with tasks that can be parallelized across multiple processes or when distributing workloads across multiple machines.
+Multithreading: Multithreading is more suitable for tasks that can benefit from concurrency within a single process and utilize shared resources effectively.
+
+
+
+
+Q3. Write a python code to create a process using the multiprocessing module. 
+import multiprocessing 
+def worker(): 
+"""Function to be executed by the process.""" 
+print("Worker process executing") 
+if __name__ == "__main__": # Create a new process 
+process = multiprocessing.Process(target=worker) # Start 
+the process process.start() # Wait for the process t
+o complete process.join()
+
+Q4. What is a multiprocessing pool in python? Why is it used? 
+A multiprocessing pool in Python refers to a pool of worker processes that are created to perform tasks concurrently
+Concurrency and Parallelism: A multiprocessing pool allows you to execute multiple tasks concurrently by distributing them among the available worker processes. This enables parallel processing
+Task Distribution: With a pool, you can easily distribute tasks across multiple processes 
+Improved Performance: By utilizing multiple processes, multiprocessing pools can significantly improve the performance of CPU-bound tasks.
+Simplified Code: Using a multiprocessing pool can simplify your code by abstracting away the complexities of process managemen
+Scalability: Multiprocessing pools offer scalability, allowing you to scale your application to handle larger workloads or take advantage of available resources in a distributed environment
+Q5. How can we create a pool of worker processes in python using the multiprocessing module? 
+import multiprocessing
+
+def worker(task):
+
+    result = task * 2
+    return result
+
+if __name__ == "__main__":
+
+    with multiprocessing.Pool() as pool:
+        
+       
+        results = pool.map(worker, [1,2,3,4,5,6])
+        print("Results:", results)
+
+
+Q6. Write a python program to create 4 processes, each process should print a different number using the  multiprocessing module in python. 
+import multiprocessing
+
+def cubes(n):
+    cube = n ** 3
+    print( cube)
+
+if __name__ == '__main__':
+    processes = []
+    numbers = [1, 2, 3, 4, 5]
+
+    for number in numbers:
+        process = multiprocessing.Process(target=cubes, args=(number,))
+        processes.append(process)
+        process.start()
+
+    for process in processes:
+        process.join()
+
+
+Note: Create your assignment in Jupyter notebook and upload it to GitHub & share that uploaded   assignment file link through your dashboard. Make sure the repository is public. 
